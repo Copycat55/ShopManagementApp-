@@ -10,7 +10,7 @@
     <div class="container">
         <h1>Shop Management App</h1>
         <form id="shopForm">
-            <div>
+            <div class="form-group">
                 <label for="shopCode">Shop Code:</label>
                 <select id="prefix" name="prefix">
                     <option value="S" selected>S</option>
@@ -20,34 +20,35 @@
                 </select>
                 <input type="number" id="shopNumber" name="shopNumber" placeholder="Number" min="1" required>
             </div>
-            <div>
+            <div class="form-group">
                 <label for="shopName">Shop Name:</label>
                 <input type="text" id="shopName" name="shopName" required>
             </div>
-            <div>
+            <div class="form-group">
                 <label for="shopKeeperName">Shop Keeper Name:</label>
                 <input type="text" id="shopKeeperName" name="shopKeeperName" required>
             </div>
-            <div>
+            <div class="form-group">
                 <label for="mobileNumber">Mobile Number:</label>
                 <input type="text" id="mobileNumber" name="mobileNumber" required>
             </div>
-            <div>
+            <div class="form-group">
                 <label for="hasSample">Sample:</label>
                 <select id="hasSample" name="hasSample">
                     <option value="Yes">Yes</option>
                     <option value="No">No</option>
                 </select>
             </div>
-            <div>
+            <div class="form-group">
                 <label for="address">Address:</label>
                 <input type="text" id="address" name="address" required>
             </div>
-            <div>
+            <div class="form-group">
                 <label for="location">Location:</label>
                 <input type="text" id="location" name="location" placeholder="Latitude, Longitude" required>
+                <button type="button" onclick="getLocation()">Get Current Location</button>
             </div>
-            <div>
+            <div class="form-group">
                 <label for="photo">Upload Photo:</label>
                 <input type="file" id="photo" name="photo" accept="image/*" required>
             </div>
