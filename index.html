@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Shop App</title>
+    <link rel="stylesheet" href="style.css">
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>Add New Shop</h1>
+        <form id="shopForm">
+            <label for="shopName">Shop Name:</label>
+            <input type="text" id="shopName" name="shopName" required><br><br>
+            
+            <label for="shopkeeperName">Shopkeeper Name:</label>
+            <input type="text" id="shopkeeperName" name="shopkeeperName" required><br><br>
+
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="text" id="phoneNumber" name="phoneNumber" required><br><br>
+
+            <label for="sample">Sample Provided:</label>
+            <select id="sample" name="sample">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select><br><br>
+
+            <label for="visitDate">Visit Date:</label>
+            <input type="date" id="visitDate" name="visitDate" required><br><br>
+
+            <label for="location">Location (Manually Add or Get Current Location):</label>
+            <input type="text" id="location" name="location" required><br><br>
+            <button type="button" id="getLocation">Get Current Location</button><br><br>
+
+            <label for="photo">Photo:</label>
+            <input type="file" id="photo" name="photo"><br><br>
+
+            <button type="submit">Add Shop</button>
+        </form>
+
+        <h2>Previously Added Shops</h2>
+        <div id="shopList"></div>
+    </div>
+    <script src="script.js"></script>
+    <button id="exportBtn">Export to Excel</button>
+</body>
+</html>
