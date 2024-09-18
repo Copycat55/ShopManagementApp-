@@ -3,6 +3,7 @@ body {
     background-color: #f4f4f4;
     margin: 0;
     padding: 20px;
+    font-size: 14px; /* Compact font size for mobile */
 }
 
 .container {
@@ -24,15 +25,22 @@ form {
     flex-direction: column;
 }
 
+.form-group {
+    display: flex;
+    align-items: center; /* Align items in a row */
+    margin-bottom: 15px;
+}
+
 label {
-    margin: 10px 0 5px;
+    flex: 1; /* Use flex to align labels and inputs */
+    margin: 0 10px 0 0;
 }
 
 input, select {
-    padding: 10px;
-    margin-bottom: 15px;
+    padding: 8px;
     border: 1px solid #ccc;
     border-radius: 3px;
+    flex: 2; /* Use flex to adjust input width */
 }
 
 button {
@@ -42,6 +50,7 @@ button {
     border: none;
     border-radius: 3px;
     cursor: pointer;
+    margin-top: 10px;
 }
 
 button:hover {
