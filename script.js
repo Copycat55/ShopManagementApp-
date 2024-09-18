@@ -59,8 +59,8 @@ function displayShops() {
 
 // Send shop details to Telegram
 function sendToTelegram(shop) {
-    const botToken = "YOUR_BOT_TOKEN"; // Replace with your bot token
-    const chatId = "YOUR_CHANNEL_ID"; // Replace with your channel ID
+    const botToken = "6251472196:AAG3YQQy4jjBHHyk234EkLm894f81U1AEio"; // Replace with your bot token
+    const chatId = "kudukkadairy"; // Replace with your channel ID
     const message = `New Shop Added:\nCode: ${shop.code}\nName: ${shop.name}\nKeeper: ${shop.keeper}\nMobile: ${shop.mobile}\nSample: ${shop.sample}\nAddress: ${shop.address}\nLocation: ${shop.location}`;
     
     const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
@@ -97,4 +97,4 @@ function exportToExcel() {
     XLSX.utils.book_append_sheet(wb, ws, "Shops");
     
     XLSX.writeFile(wb, "shops.xlsx");
-}
+} 
