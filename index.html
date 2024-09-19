@@ -1,65 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shop Manager</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Tracker</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Shop Manager</h1>
-
-    <form id="shop-form">
-      <div class="form-group">
-        <label for="shop-name">Shop Name:</label>
-        <input type="text" id="shop-name" placeholder="Enter shop name" required>
-      </div>
-
-      <div class="form-group">
-        <label for="shop-code">Shop Code:</label>
-        <input type="text" id="shop-code" placeholder="S1" required>
-      </div>
-
-      <div class="form-group">
-        <label for="shop-keeper">Shopkeeper Name:</label>
-        <input type="text" id="shop-keeper" placeholder="Enter shopkeeper name" required>
-      </div>
-
-      <div class="form-group">
-        <label for="phone">Phone Number:</label>
-        <input type="tel" id="phone" placeholder="Enter phone number" required>
-      </div>
-
-      <div class="form-group">
-        <label for="sample">Sample:</label>
-        <select id="sample" required>
-          <option value="Yes">Yes</option>
-          <option value="No">No</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="location">Location:</label>
-        <input type="text" id="location" placeholder="Enter location or click 'Get Location'">
-        <button type="button" id="get-location">Get Location</button>
-      </div>
-
-      <div class="form-group">
-        <label for="photo">Photo:</label>
-        <input type="file" id="photo" accept="image/*" required>
-      </div>
-
-      <button type="submit">Add Shop</button>
-    </form>
-
-    <h2>Shops List</h2>
-    <ul id="shops-list"></ul>
-
-    <button id="export-excel">Export to Excel</button>
-    <input type="file" id="import-excel" accept=".xls, .xlsx">
-  </div>
-
-  <script src="script.js"></script>
+    <div class="container">
+        <h1>Shop Tracker</h1>
+        <form id="shopForm">
+            <div class="form-group">
+                <label for="shopCode">Shop Code:</label>
+                <input type="text" id="shopCode" placeholder="S1" required>
+            </div>
+            <div class="form-group">
+                <label for="shopName">Shop Name:</label>
+                <input type="text" id="shopName" required>
+            </div>
+            <div class="form-group">
+                <label for="shopKeeperName">Shop Keeper's Name:</label>
+                <input type="text" id="shopKeeperName" required>
+            </div>
+            <div class="form-group">
+                <label for="mobileNumber">Mobile Number:</label>
+                <input type="text" id="mobileNumber" required>
+            </div>
+            <div class="form-group">
+                <label for="sample">Has Sample:</label>
+                <select id="sample">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="location">Location:</label>
+                <input type="text" id="location" placeholder="Location" required>
+                <button type="button" onclick="getLocation()">Get Location</button>
+            </div>
+            <div class="form-group">
+                <label for="photo">Shop Photo:</label>
+                <input type="file" id="photo" accept="image/*" required>
+            </div>
+            <button type="submit">Add Shop</button>
+        </form>
+        <div id="shopList"></div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
