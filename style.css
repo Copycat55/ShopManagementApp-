@@ -3,17 +3,11 @@ body {
     background-color: #f4f4f4;
     margin: 0;
     padding: 20px;
-}
-
-.logo {
-    display: block;
-    margin: 0 auto 20px auto;
-    max-width: 100%; /* Ensure logo is responsive */
-    height: auto; /* Maintain aspect ratio */
+    font-size: 12px;
 }
 
 .container {
-    max-width: 100%; /* Use full width on mobile */
+    max-width: 100%;
     margin: 0 auto;
     background: white;
     padding: 15px;
@@ -23,7 +17,7 @@ body {
 
 h2 {
     text-align: center;
-    font-size: 1.5em;
+    font-size: 18px;
     color: #063b5a;
 }
 
@@ -36,28 +30,30 @@ form {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 label {
     font-weight: bold;
-    color: #fec329; /* Label color */
-    font-size: 12px; /* Compact font size */
-    flex: 0.4; /* Adjust the width of label */
-    text-align: left; /* Align label text */
+    color: #fec329;
+    font-size: 12px;
+    flex: 0.3;
+    text-align: left;
 }
 
 input[type="text"],
 input[type="file"],
 input[type="number"],
-textarea {
+textarea,
+select,
+input[type="date"] {
     padding: 5px;
     margin-left: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    font-size: 12px; /* Compact font size */
-    flex: 0.6; /* Adjust the width of input */
-    width: 100%; /* Ensure input takes full width */
+    font-size: 12px;
+    flex: 0.7;
+    width: 100%;
 }
 
 button {
@@ -68,7 +64,6 @@ button {
     border-radius: 4px;
     font-size: 12px;
     cursor: pointer;
-    transition: background-color 0.3s;
     margin-top: 10px;
 }
 
@@ -76,14 +71,9 @@ button:hover {
     background-color: #0056b3;
 }
 
-.import-button {
-    margin-top: 20px;
+#exportBtn {
     background-color: #fec329;
     color: #063b5a;
-    border: none;
-    border-radius: 4px;
-    padding: 8px;
-    cursor: pointer;
 }
 
 .shop-item {
@@ -94,32 +84,28 @@ button:hover {
     background-color: #f9f9f9;
 }
 
-.shop-photo {
-    max-width: 100%;
-    height: auto;
-    border: 2px solid #fec329;
-}
-
 /* Responsive Design */
 @media (max-width: 600px) {
     .field-group {
-        flex-direction: column; /* Stack label and input on smaller screens */
+        flex-direction: column;
         align-items: flex-start;
     }
     
     label {
-        margin-bottom: 5px; /* Add some space between label and input */
+        margin-bottom: 5px;
     }
 
     input[type="text"],
     input[type="file"],
     input[type="number"],
-    textarea {
-        margin-left: 0; /* Remove left margin on small screens */
-        width: 100%; /* Ensure full width */
+    textarea,
+    select,
+    input[type="date"] {
+        margin-left: 0;
+        width: 100%;
     }
     
-    button, .import-button {
-        width: 100%; /* Make buttons full width */
+    button {
+        width: 100%;
     }
 }
