@@ -8,14 +8,15 @@ body {
 .logo {
     display: block;
     margin: 0 auto 20px auto;
-    max-width: 200px; /* Adjust as needed */
+    max-width: 100%; /* Ensure logo is responsive */
+    height: auto; /* Maintain aspect ratio */
 }
 
 .container {
-    max-width: 400px; /* Reduce overall form size */
+    max-width: 100%; /* Use full width on mobile */
     margin: 0 auto;
     background: white;
-    padding: 20px;
+    padding: 15px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -23,7 +24,7 @@ body {
 h2 {
     text-align: center;
     font-size: 1.5em;
-    color: #063b5a; /* Change this to #063b5a */
+    color: #063b5a;
 }
 
 form {
@@ -31,40 +32,58 @@ form {
     flex-direction: column;
 }
 
+.field-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
 label {
-    margin-bottom: 5px;
     font-weight: bold;
-    color: #063b5a; /* Change this to #063b5a */
+    color: #fec329; /* Label color */
+    font-size: 12px; /* Compact font size */
+    flex: 0.4; /* Adjust the width of label */
+    text-align: left; /* Align label text */
 }
 
 input[type="text"],
 input[type="file"],
 input[type="number"],
 textarea {
-    margin-bottom: 15px;
-    padding: 10px;
+    padding: 5px;
+    margin-left: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    font-size: 14px; /* Compact font size */
-}
-
-input[type="radio"] {
-    margin-right: 5px;
+    font-size: 12px; /* Compact font size */
+    flex: 0.6; /* Adjust the width of input */
+    width: 100%; /* Ensure input takes full width */
 }
 
 button {
-    padding: 10px;
-    background-color: #063b5a; /* Button color */
+    padding: 8px;
+    background-color: #063b5a;
     color: white;
     border: none;
     border-radius: 4px;
-    font-size: 14px; /* Compact font size */
+    font-size: 12px;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin-top: 10px;
 }
 
 button:hover {
-    background-color: #0056b3; /* Darken button color on hover */
+    background-color: #0056b3;
+}
+
+.import-button {
+    margin-top: 20px;
+    background-color: #fec329;
+    color: #063b5a;
+    border: none;
+    border-radius: 4px;
+    padding: 8px;
+    cursor: pointer;
 }
 
 .shop-item {
@@ -72,14 +91,35 @@ button:hover {
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 4px;
+    background-color: #f9f9f9;
 }
 
 .shop-photo {
-    max-width: 100%; /* Make sure the photo fits */
+    max-width: 100%;
     height: auto;
-    border: 2px solid #fec329; /* Border color for shop photos */
+    border: 2px solid #fec329;
 }
 
-.input-label-color {
-    color: #fec329; /* Color for labels */
+/* Responsive Design */
+@media (max-width: 600px) {
+    .field-group {
+        flex-direction: column; /* Stack label and input on smaller screens */
+        align-items: flex-start;
+    }
+    
+    label {
+        margin-bottom: 5px; /* Add some space between label and input */
+    }
+
+    input[type="text"],
+    input[type="file"],
+    input[type="number"],
+    textarea {
+        margin-left: 0; /* Remove left margin on small screens */
+        width: 100%; /* Ensure full width */
+    }
+    
+    button, .import-button {
+        width: 100%; /* Make buttons full width */
+    }
 }
