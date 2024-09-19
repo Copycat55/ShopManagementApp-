@@ -1,40 +1,84 @@
-// Telegram bot details
-const botToken = '6251472196:AAG3YQQy4jjBHHyk234EkLm894f81U1AEio';
-const chatId = '@kudukkadairy';
-
-// Handle form submission
 document.getElementById('shopForm').addEventListener('submit', function(e) {
     e.preventDefault();
-
+    
     const shopCode = document.getElementById('shopCode').value;
     const shopName = document.getElementById('shopName').value;
+    const shopkeeperName = document.getElementById('shopkeeperName').value;
+    const phoneNumber = document.getElementById('phoneNumber').value;
     const sample = document.getElementById('sample').value;
-    const visitDate = document.getElementById('visitDate').value;
     const location = document.getElementById('location').value;
-    const shopKeeperName = document.getElementById('shopKeeperName').value;
-    const mobileNumber = document.getElementById('mobileNumber').value;
+    const photo = document.getElementById('photo').files[0];
 
-    // Construct Telegram message
-    const message = `Shop Code: ${shopCode}\nShop Name: ${shopName}\nSample: ${sample}\nVisit Date: ${visitDate}\nLocation: ${location}\nShopkeeper: ${shopKeeperName}\nMobile: ${mobileNumber}`;
+    if (shopCode && shopName && shopkeeperName && phoneNumber && location) {
+        const shopData = {
+            shopCode,
+            shopName,
+            shopkeeperName,
+            phoneNumber,
+            sample,
+            location,
+            photo
+        };
 
-    // Send message to Telegram
-    sendMessageToTelegram(message);
+        addShopToList(shopData);
+        sendShopToTelegram(shopData);
 
-    // Clear the form after submission
-    document.getElementById('shopForm').reset();
+        // Reset the form
+        document.getElementById('shopForm').reset();
+    } else {
+        alert("Please fill all fields.");
+    }
 });
 
-// Function to send message to Telegram
-function sendMessageToTelegram(message) {
-    const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+function addShopToList(shopData) {
+    const shopList = document.getElementById('shopList');
+    const listItem = document.createElement('li');
     
-    fetch(url)
-        .then(response => response.json())
-        .then(data => console.log('Message sent successfully:', data))
-        .catch(error => console.error('Error sending message:', error));
+    listItem.innerHTML = `
+        ${shopData.shopCode}: ${shopData.shopName} - ${shopData.shopkeeperName}
+        <button onclick="editShop('${shopData.shopCode}')">Edit</button>
+    `;
+    
+    shopList.appendChild(listItem);
 }
 
-// Get current location
+function sendShopToTelegram(shopData) {
+    const telegramMessage = `
+        #bot
+        *Shop Code*: ${shopData.shopCode}
+        *Shop Name*: ${shopData.shopName}
+        *Shopkeeper*: ${shopData.shopkeeperName}
+        *Phone*: ${shopData.phoneNumber}
+        *Sample*: ${shopData.sample}
+        *Location*: ${shopData.location}
+    `;
+
+    const token = '6251472196:AAG3YQQy4jjBHHyk234EkLm894f81U1AEio';
+    const chatId = '-2411359406';
+
+    const formData = new FormData();
+    formData.append('chat_id', chatId);
+    formData.append('text', telegramMessage);
+    formData.append('parse_mode', 'Markdown');
+
+    if (shopData.photo) {
+        formData.append('photo', shopData.photo);
+        fetch(`https://api.telegram.org/bot${token}/sendPhoto`, {
+            method: 'POST',
+            body: formData
+        }).then(response => response.json())
+          .then(result => console.log(result))
+          .catch(error => console.log('Error:', error));
+    } else {
+        fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+            method: 'POST',
+            body: formData
+        }).then(response => response.json())
+          .then(result => console.log(result))
+          .catch(error => console.log('Error:', error));
+    }
+}
+
 document.getElementById('getLocationBtn').addEventListener('click', function() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
@@ -49,11 +93,10 @@ document.getElementById('getLocationBtn').addEventListener('click', function() {
     }
 });
 
-// Add shop to list (for display purpose)
-document.getElementById('addShopBtn').addEventListener('click', function() {
-    const shopName = document.getElementById('shopName').value;
-    const shopItem = document.createElement('div');
-    shopItem.className = 'shop-item';
-    shopItem.innerHTML = `<p>${shopName}</p>`;
-    document.getElementById('shopList').appendChild(shopItem);
+function editShop(shopCode) {
+    alert("Editing for " + shopCode);
+}
+
+document.getElementById('exportBtn').addEventListener('click', function() {
+    // Export logic goes here
 });
