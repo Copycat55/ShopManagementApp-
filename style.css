@@ -1,83 +1,74 @@
-/* General styles */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 10px;
-    background-color: #f7f7f7; /* Light background for contrast */
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
 }
 
-h1 {
-    text-align: center;
-    color: #063b5a; /* Button color */
+.container {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
 }
 
-/* Form styles */
-form {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
+h1, h2 {
+  color: #063b5a;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
 }
 
 label {
-    margin: 5px 0;
+  color: #063b5a;
+  font-size: 14px;
+  flex: 1;
 }
 
-/* Input and select styles */
-input[type="text"],
-input[type="file"],
-select {
-    width: 100%;
-    padding: 8px;
-    margin: 5px 0;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+input, select, button {
+  flex: 2;
+  padding: 8px;
+  font-size: 14px;
 }
 
-/* Button styles */
+input[type="file"] {
+  padding: 3px;
+}
+
 button {
-    background-color: #063b5a; /* Button color */
-    color: #fff;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    margin-top: 10px;
-    border-radius: 5px;
-    font-size: 14px;
+  background-color: #063b5a;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
 }
 
 button:hover {
-    background-color: #0a4b7d; /* Darker shade on hover */
+  background-color: #051d34;
 }
 
-/* Shop list styles */
-#shopList {
-    margin-top: 20px;
+#shops-list {
+  list-style: none;
+  padding: 0;
 }
 
-.shop-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff; /* White background for shop items */
+#shops-list li {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
 }
 
-.shop-item img {
-    border-radius: 5px; /* Rounded corners for photos */
+#export-excel {
+  background-color: #fec329;
+  margin-top: 20px;
 }
 
-/* Responsive adjustments */
-@media (max-width: 600px) {
-    input[type="text"],
-    select {
-        font-size: 12px; /* Smaller font size for mobile */
-    }
-
-    button {
-        font-size: 12px; /* Smaller button text */
-    }
+#export-excel:hover {
+  background-color: #e6b727;
 }
