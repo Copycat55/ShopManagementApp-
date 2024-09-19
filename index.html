@@ -3,23 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop Management App</title>
+    <title>Shop Manager</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h2>Shop Management</h2>
+        <h2>Shop Entry Form</h2>
         <form id="shopForm">
             <div class="field-group">
                 <label for="shopCode">Shop Code</label>
-                <input type="text" id="shopCode" placeholder="e.g., S1">
+                <input type="text" id="shopCode" placeholder="Enter Shop Code" required>
             </div>
-
             <div class="field-group">
                 <label for="shopName">Shop Name</label>
-                <input type="text" id="shopName" placeholder="Enter shop name">
+                <input type="text" id="shopName" placeholder="Enter Shop Name" required>
             </div>
-
+            <div class="field-group">
+                <label for="shopkeeperName">Shopkeeper's Name</label>
+                <input type="text" id="shopkeeperName" placeholder="Enter Shopkeeper's Name" required>
+            </div>
+            <div class="field-group">
+                <label for="phoneNumber">Phone Number</label>
+                <input type="text" id="phoneNumber" placeholder="Enter Phone Number" required>
+            </div>
             <div class="field-group">
                 <label for="sample">Sample Available</label>
                 <select id="sample">
@@ -27,39 +33,22 @@
                     <option value="No">No</option>
                 </select>
             </div>
-
-            <div class="field-group">
-                <label for="visitDate">Visit Date</label>
-                <input type="date" id="visitDate">
-            </div>
-
             <div class="field-group">
                 <label for="location">Location</label>
                 <input type="text" id="location" placeholder="Enter location manually" />
-                <button type="button" id="getLocationBtn">Get Location</button>
+                <button type="button" id="getLocationBtn">Get Current Location</button>
             </div>
-
             <div class="field-group">
-                <label for="photo">Shop Photo</label>
+                <label for="photo">Upload Photo</label>
                 <input type="file" id="photo" accept="image/*">
             </div>
-
-            <div class="field-group">
-                <label for="shopKeeperName">Shopkeeper's Name</label>
-                <input type="text" id="shopKeeperName" placeholder="Enter shopkeeper name">
-            </div>
-
-            <div class="field-group">
-                <label for="mobileNumber">Mobile Number</label>
-                <input type="number" id="mobileNumber" placeholder="Enter mobile number">
-            </div>
-
             <button type="submit" id="addShopBtn">Add Shop</button>
         </form>
-
-        <button id="exportBtn">Export to Excel</button>
-
-        <div id="shopList"></div>
+        <div class="shop-list">
+            <h3>Added Shops</h3>
+            <ul id="shopList"></ul>
+        </div>
+        <button id="exportBtn">Export Selected Shops</button>
     </div>
 
     <script src="script.js"></script>
