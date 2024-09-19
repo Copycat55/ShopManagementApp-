@@ -2,16 +2,16 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
-    padding: 0;
+    padding: 20px;
 }
 
 .container {
     max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
+    margin: auto;
     background: white;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
@@ -20,45 +20,43 @@ h1 {
 }
 
 .form-group {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     margin-bottom: 15px;
 }
 
 label {
-    flex: 1;
-    margin-right: 10px;
+    display: block;
+    margin-bottom: 5px;
 }
 
-input, select {
-    flex: 2;
+input[type="text"] {
+    width: 100%;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
 
 button {
-    background-color: #063b5a;
+    background-color: #fdc229;
     color: white;
+    padding: 10px 15px;
     border: none;
-    padding: 10px;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
+    width: 100%;
 }
 
 button:hover {
-    background-color: #045b7f;
+    background-color: #063b5a;
 }
 
-#shopList {
-    margin-top: 20px;
+#leadList {
+    list-style: none;
+    padding: 0;
 }
 
-.shop-item {
+#leadList li {
+    background: #fdc229;
     padding: 10px;
-    border: 1px solid #ccc;
+    margin: 5px 0;
     border-radius: 4px;
-    margin-bottom: 10px;
-    background-color: #e8f0fe;
 }

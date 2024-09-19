@@ -3,48 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop Tracker</title>
+    <title>Lead Manager</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>Shop Tracker</h1>
-        <form id="shopForm">
+        <h1>Lead Manager</h1>
+        <form id="leadForm">
             <div class="form-group">
-                <label for="shopCode">Shop Code:</label>
-                <input type="text" id="shopCode" placeholder="S1" required>
+                <label for="shopCode">Shop Code (e.g., S1)</label>
+                <input type="text" id="shopCode" placeholder="Shop Code (optional)">
             </div>
             <div class="form-group">
-                <label for="shopName">Shop Name:</label>
-                <input type="text" id="shopName" required>
+                <label for="shopName">Shop Name</label>
+                <input type="text" id="shopName" placeholder="Enter Shop Name">
             </div>
             <div class="form-group">
-                <label for="shopKeeperName">Shop Keeper's Name:</label>
-                <input type="text" id="shopKeeperName" required>
+                <label for="shopKeeperName">Shop Keeper's Name</label>
+                <input type="text" id="shopKeeperName" placeholder="Enter Shop Keeper's Name">
             </div>
             <div class="form-group">
-                <label for="mobileNumber">Mobile Number:</label>
-                <input type="text" id="mobileNumber" required>
+                <label for="mobileNumber">Mobile Number</label>
+                <input type="text" id="mobileNumber" placeholder="Enter Mobile Number">
             </div>
             <div class="form-group">
-                <label for="sample">Has Sample:</label>
-                <select id="sample">
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                </select>
+                <label for="address">Address</label>
+                <input type="text" id="address" placeholder="Enter Address">
             </div>
             <div class="form-group">
-                <label for="location">Location:</label>
-                <input type="text" id="location" placeholder="Location" required>
-                <button type="button" onclick="getLocation()">Get Location</button>
+                <label for="shopPhoto">Shop Photo URL</label>
+                <input type="text" id="shopPhoto" placeholder="Enter Shop Photo URL">
             </div>
+            <button type="button" id="getLocation">Get Location</button>
             <div class="form-group">
-                <label for="photo">Shop Photo:</label>
-                <input type="file" id="photo" accept="image/*" required>
+                <label for="location">Location (Latitude, Longitude)</label>
+                <input type="text" id="location" placeholder="Location will be generated here">
             </div>
-            <button type="submit">Add Shop</button>
+            <button type="submit">Add Lead</button>
         </form>
-        <div id="shopList"></div>
+        <h2>Added Leads</h2>
+        <ul id="leadList"></ul>
     </div>
     <script src="script.js"></script>
 </body>
