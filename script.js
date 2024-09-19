@@ -57,28 +57,43 @@ function displayShops() {
     });
 }
 
-// Send shop details to Telegram
+// Send shop details with photo to Telegram
 function sendToTelegram(shop) {
     const botToken = "6251472196:AAG3YQQy4jjBHHyk234EkLm894f81U1AEio"; // Your bot token
     const chatId = "@kudukkadairy"; // Your channel ID
 
+    // First, send the text message
     const message = `New Shop Added:\nCode: ${shop.code}\nName: ${shop.name}\nKeeper: ${shop.keeper}\nMobile: ${shop.mobile}\nSample: ${shop.sample}\nAddress: ${shop.address}\nLocation: ${shop.location}`;
     
-    const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
-    
-    fetch(url)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Network response was not ok");
-            }
-            return response.json();
-        })
+    const textUrl = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+
+    fetch(textUrl)
+        .then(response => response.json())
         .then(data => {
             console.log("Message sent successfully:", data);
         })
         .catch(error => {
             console.error("Error sending message:", error);
         });
+
+    // Now send the photo
+    const formData = new FormData();
+    formData.append("chat_id", chatId);
+    formData.append("photo", shop.photo);
+
+    const photoUrl = `https://api.telegram.org/bot${botToken}/sendPhoto`;
+
+    fetch(photoUrl, {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Photo sent successfully:", data);
+    })
+    .catch(error => {
+        console.error("Error sending photo:", error);
+    });
 }
 
 // Get Current Location
