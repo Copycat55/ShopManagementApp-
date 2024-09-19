@@ -1,23 +1,22 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
     margin: 0;
-    padding: 20px;
-    font-size: 14px; /* Compact font size for mobile */
+    padding: 0;
+    background-color: #f4f4f4;
 }
 
 .container {
     max-width: 600px;
-    margin: auto;
-    background: white;
+    margin: 20px auto;
     padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
+h1, h2 {
     text-align: center;
-    color: #333;
+    margin-bottom: 20px;
+    font-size: 24px;
 }
 
 form {
@@ -25,44 +24,43 @@ form {
     flex-direction: column;
 }
 
-.form-group {
-    display: flex;
-    align-items: center; /* Align items in a row */
-    margin-bottom: 15px;
-}
-
 label {
-    flex: 1; /* Use flex to align labels and inputs */
-    margin: 0 10px 0 0;
+    margin-bottom: 5px;
 }
 
-input, select {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    flex: 2; /* Use flex to adjust input width */
+input[type="text"], input[type="tel"], select, input[type="file"] {
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 16px;
 }
 
 button {
     padding: 10px;
-    background-color: #28a745;
+    font-size: 16px;
+    background-color: #007BFF;
     color: white;
     border: none;
-    border-radius: 3px;
     cursor: pointer;
-    margin-top: 10px;
 }
 
 button:hover {
-    background-color: #218838;
+    background-color: #0056b3;
 }
 
-#shopList {
+#shopsList {
     margin-top: 20px;
 }
 
-.shop-item {
-    border: 1px solid #ccc;
+.shop-entry {
     padding: 10px;
-    margin: 10px 0;
+    margin-bottom: 10px;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.shop-entry button {
+    padding: 5px;
+    background-color: #ff0000;
 }
