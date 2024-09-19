@@ -1,70 +1,68 @@
 let shops = [];
 
-// Add shop function
-document.getElementById('shopForm').addEventListener('submit', function (e) {
-    e.preventDefault();
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            document.getElementById('location').value = position.coords.latitude + ',' + position.coords.longitude;
+        });
+    } else {
+        alert("Geolocation is not supported by this browser.");
+    }
+}
 
-    const prefix = document.getElementById('prefix').value;
-    const shopNumber = document.getElementById('shopNumber').value;
-    const shopName = document.getElementById('shopName').value;
-    const shopKeeperName = document.getElementById('shopKeeperName').value;
-    const mobileNumber = document.getElementById('mobileNumber').value;
-    const hasSample = document.getElementById('hasSample').value;
-    const address = document.getElementById('address').value;
-    const location = document.getElementById('location').value;
-    const photo = document.getElementById('photo').files[0];
-
-    if (!photo) return;
-
-    const reader = new FileReader();
-    reader.onload = function (e) {
-        const newShop = {
-            code: `${prefix}${shopNumber}`,
-            name: shopName,
-            keeper: shopKeeperName,
-            mobile: mobileNumber,
-            sample: hasSample,
-            address: address,
-            location: location,
-            photo: e.target.result,
-        };
-
-        shops.push(newShop);
-        displayShops();
-        sendToTelegram(newShop);
+document.getElementById('shopForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+    
+    const shop = {
+        code: document.getElementById('shopCodePrefix').value + document.getElementById('shopCodeNumber').value,
+        name: document.getElementById('name').value,
+        keeper: document.getElementById('keeper').value,
+        mobile: document.getElementById('mobile').value,
+        sample: document.getElementById('sample').value,
+        address: document.getElementById('address').value,
+        photo: document.getElementById('photo').files[0],
+        location: document.getElementById('location').value
     };
-
-    reader.readAsDataURL(photo);
+    
+    shops.push(shop);
+    updateShopList();
+    sendToTelegram(shop);
+    clearForm();
 });
 
-// Display shops
-function displayShops() {
-    const shopList = document.getElementById('shopList');
-    shopList.innerHTML = '';
-    shops.forEach(shop => {
-        const div = document.createElement('div');
-        div.classList.add('shop-item');
-        div.innerHTML = `
-            <h4>${shop.code} - ${shop.name}</h4>
-            <p>Keeper: ${shop.keeper}</p>
-            <p>Mobile: ${shop.mobile}</p>
-            <p>Sample: ${shop.sample}</p>
-            <p>Address: ${shop.address}</p>
-            <p>Location: ${shop.location}</p>
-            <img src="${shop.photo}" alt="Shop Photo" style="width: 100px; height: auto;">
+function updateShopList() {
+    const shopListDiv = document.getElementById('shopsList');
+    shopListDiv.innerHTML = '';
+    shops.forEach((shop, index) => {
+        const shopDiv = document.createElement('div');
+        shopDiv.className = 'shop-entry';
+        shopDiv.innerHTML = `
+            <div>
+                <strong>${shop.code} - ${shop.name}</strong><br>
+                ${shop.keeper} - ${shop.mobile}<br>
+                Sample: ${shop.sample} <br>
+                Address: ${shop.address}
+            </div>
         `;
-        shopList.appendChild(div);
+        shopListDiv.appendChild(shopDiv);
     });
 }
 
-// Send shop details with photo to Telegram
 function sendToTelegram(shop) {
     const botToken = "6251472196:AAG3YQQy4jjBHHyk234EkLm894f81U1AEio"; // Your bot token
     const chatId = "@kudukkadairy"; // Your channel ID
 
-    // First, send the text message
-    const message = `New Shop Added:\nCode: ${shop.code}\nName: ${shop.name}\nKeeper: ${shop.keeper}\nMobile: ${shop.mobile}\nSample: ${shop.sample}\nAddress: ${shop.address}\nLocation: ${shop.location}`;
-    
+    const googleMapsLink = `https://www.google.com/maps?q=${shop.location}`;
+
+    const message = `New Shop Added:
+Code: ${shop.code}
+Name: ${shop.name}
+Keeper: ${shop.keeper}
+Mobile: ${shop.mobile}
+Sample: ${shop.sample}
+Address: ${shop.address}
+Location: ${googleMapsLink}`;
+
     const textUrl = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
 
     fetch(textUrl)
@@ -76,54 +74,46 @@ function sendToTelegram(shop) {
             console.error("Error sending message:", error);
         });
 
-    // Now send the photo
-    const formData = new FormData();
-    formData.append("chat_id", chatId);
-    formData.append("photo", shop.photo);
+    // Send the photo
+    if (shop.photo) {
+        const formData = new FormData();
+        formData.append("chat_id", chatId);
+        formData.append("photo", shop.photo);
 
-    const photoUrl = `https://api.telegram.org/bot${botToken}/sendPhoto`;
+        const photoUrl = `https://api.telegram.org/bot${botToken}/sendPhoto`;
 
-    fetch(photoUrl, {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log("Photo sent successfully:", data);
-    })
-    .catch(error => {
-        console.error("Error sending photo:", error);
-    });
-}
-
-// Get Current Location
-function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-            const lat = position.coords.latitude;
-            const lon = position.coords.longitude;
-            document.getElementById('location').value = `${lat}, ${lon}`;
+        fetch(photoUrl, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Photo sent successfully:", data);
+        })
+        .catch(error => {
+            console.error("Error sending photo:", error);
         });
-    } else {
-        alert("Geolocation is not supported by this browser.");
     }
 }
 
-// Export to Excel
 function exportToExcel() {
     const data = shops.map(shop => ({
-        ShopCode: shop.code,
-        ShopName: shop.name,
-        ShopKeeper: shop.keeper,
-        MobileNumber: shop.mobile,
-        Sample: shop.sample,
-        Address: shop.address,
-        Location: shop.location,
+        "Shop Code": shop.code,
+        "Shop Name": shop.name,
+        "Shop Keeper": shop.keeper,
+        "Mobile Number": shop.mobile,
+        "Sample Provided": shop.sample,
+        "Shop Address": shop.address,
+        "Location": shop.location
     }));
 
-    const ws = XLSX.utils.json_to_sheet(data);
+    const ws = XLSX.utils.json_to_sheet(data, { header: ["Shop Code", "Shop Name", "Shop Keeper", "Mobile Number", "Sample Provided", "Shop Address", "Location"] });
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "Shops");
-    
+
     XLSX.writeFile(wb, "shops.xlsx");
+}
+
+function clearForm() {
+    document.getElementById('shopForm').reset();
 }
